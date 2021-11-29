@@ -11,11 +11,18 @@ namespace PromotionEngine.Models
     public class BaseStrategy : IPromotionStrategy
     {
         private decimal _price;
-        bool containSKU1 = false, containSKU2 = false;
+        private bool containSKU1 = false, containSKU2 = false;
 
         public BaseStrategy(decimal price)
         {
-
+            if (price == PriceForOne.PriceForC)
+            {
+                containSKU1 = true;
+            }
+            else if (price == PriceForOne.PriceForD)
+            {
+                containSKU2 = true;
+            }
             if (price < 0) throw new Exception($"{nameof(price)}:{price} - should be greater than Zero");
             _price = price;
 

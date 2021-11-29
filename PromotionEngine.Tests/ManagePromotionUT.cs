@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using PromotionEngine.Bussiness;
+using PromotionEngine.Constants;
 using PromotionEngine.Models;
 using System.Collections.Generic;
 
@@ -20,7 +21,7 @@ namespace PromotionEngine.Tests
         {
             var handler = new ManagePromotion(promotions);
             var skus = new List<SKU>();
-            skus.Add(new SKU("A", 2 ));
+            skus.Add(new SKU(SKUList.A, 2 ));
             var price = handler.Compute(skus);
 
             Assert.AreEqual(100, price);
@@ -31,7 +32,7 @@ namespace PromotionEngine.Tests
         {
             var handler = new ManagePromotion(promotions);
             var skus = new List<SKU>();
-            skus.Add(new SKU("B", 5));
+            skus.Add(new SKU(SKUList.B, 5));
             var price = handler.Compute(skus);
 
             Assert.AreEqual(120, price);
@@ -42,7 +43,7 @@ namespace PromotionEngine.Tests
         {
             var handler = new ManagePromotion(promotions);
             var skus = new List<SKU>();
-            skus.Add(new SKU("C", 10));
+            skus.Add(new SKU(SKUList.C, 10));
             var price = handler.Compute(skus);
 
             Assert.AreEqual(100, price);
@@ -52,10 +53,10 @@ namespace PromotionEngine.Tests
         {
             return new Dictionary<SKU, IPromotionStrategy>()
             {
-                { new SKU("A",1), new QuantityPromotionStrategy(50, 130, 3) },
-                { new SKU("B",1), new QuantityPromotionStrategy(30, 45, 2) },
-                { new SKU("C",1), new BaseStrategy(10) }  ,
-                 { new SKU("D",1), new BaseStrategy(10) }
+                { new SKU(SKUList.A,1), new QuantityPromotionStrategy(PriceForOne.PriceForA, PriceForMultiple.PriceForA, 3) },
+                { new SKU(SKUList.B,1), new QuantityPromotionStrategy(PriceForOne.PriceForB, PriceForMultiple.PriceForB, 2) },
+                { new SKU(SKUList.C,1), new BaseStrategy(PriceForOne.PriceForC) },
+                { new SKU(SKUList.D,1), new BaseStrategy(PriceForOne.PriceForD) }
             };
         }
     }

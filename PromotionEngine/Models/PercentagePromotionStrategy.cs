@@ -20,8 +20,8 @@ namespace PromotionEngine.Models
             _percentDiscount = percentDiscount;
             _price = price;
 
-            
         }
+
         public decimal GetBestPrice(int quantity)
         {
             if (quantity < 0) throw new Exception($"{nameof(quantity)}:{quantity} - should be greater than Zero");
